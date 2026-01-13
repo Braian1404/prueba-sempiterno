@@ -27,3 +27,13 @@ Este proyecto es una solución backend desarrollada con **NestJS** y **PostgreSQ
 |--------|----------|------------|
 | ADMIN  | admin    | 1234       |
 | CLIENT | client   | 1234       |
+
+## Modelo Entidad-Relación (MER)
+
+Se diseñó una estructura de datos optimizada para garantizar la integridad y escalabilidad del sistema médico.
+
+* Implementado en todas las llaves primarias para mejorar la seguridad y evitar la enumeración de recursos.
+* Los servicios médicos cuentan con eliminación lógica para preservar el histórico de datos.
+* Uso de Enums para el control de roles (`ADMIN`, `CLIENT`).
+
+![Diagrama MER](./docs/mer-database.png)
