@@ -36,4 +36,4 @@ Se diseñó una estructura de datos optimizada para garantizar la integridad y e
 * Los servicios médicos cuentan con eliminación lógica para preservar el histórico de datos.
 * Uso de Enums para el control de roles (`ADMIN`, `CLIENT`).
 
-![Diagrama MER](./docs/mer-database.png)
+![Diagrama MER](./docs/citas-medicas-mer)
