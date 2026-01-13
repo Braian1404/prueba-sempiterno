@@ -18,16 +18,16 @@ export class MedicalServicesService {
     return await this.medicalServiceRepository.save(newService);
   }
 
-  async findAll(StartDate?: Date, EndDate?: Date) {
-    if (StartDate && EndDate) {
-
+  async findAll(startDate?: string, endDate?: string) {
+    if (startDate && endDate) {
       return await this.medicalServiceRepository.find({
         where: {
-          availableDate: Between(StartDate, EndDate),
-        },
+          
+          availableDate: Between(new Date(startDate), new Date(endDate))
+        }
       });
-
-    } 
+    }
+    return await this.medicalServiceRepository.find();
   }
 
   async findOne(id: string) {

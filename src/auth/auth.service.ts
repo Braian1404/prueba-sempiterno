@@ -1,26 +1,63 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Injectable, UnauthorizedException, OnModuleInit } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { Role } from './enums/role.enum';
 
 @Injectable()
-export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+export class AuthService implements OnModuleInit {
+  constructor(
+    private jwtService: JwtService,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
+
+async onModuleInit() {
+
+  const adminExists = await this.userRepository.findOne({ where: { username: 'admin' } });
+  
+  if (!adminExists) {
+    const admin = this.userRepository.create({
+      username: 'admin',
+      password: '1234',
+      role: Role.ADMIN,
+    });
+    await this.userRepository.save(admin);
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  const clientExists = await this.userRepository.findOne({ where: { username: 'cliente' } });
+  
+  if (!clientExists) {
+    const client = this.userRepository.create({
+      username: 'cliente',
+      password: '1234',
+      role: Role.CLIENT,
+    });
+    await this.userRepository.save(client);
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
   }
+}
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+  async login(loginDto: any) {
+    const { username, password } = loginDto;
+    
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    const user = await this.userRepository.findOne({ 
+      where: { username },
+      select: ['id', 'username', 'password', 'role'] 
+    });
+
+    if (!user || user.password !== password) {
+      throw new UnauthorizedException('Credenciales inválidas');
+    }
+
+    return {
+      accessToken: this.jwtService.sign({ 
+        username: user.username, 
+        sub: user.id, 
+        role: user.role 
+      }),
+    };
   }
 }

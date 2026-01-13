@@ -6,20 +6,20 @@ export class CreateMedicalServiceDto {
     @ApiProperty({example: "Consulta General"})
     @IsString()
     @IsNotEmpty()
-    name: string;
+    nombre: string;
 
     @ApiProperty({example: "Chequeo Preventivo Anual"})
     @IsString()
     @IsNotEmpty()
-    description: string;
+    descripción: string;
 
     @ApiProperty({example: 10000})
     @IsNumber()
-    cost: number
+    costo: number
 
     @ApiProperty({example: 30})
     @IsString()
-    duration: number
+    duración: number
 
     @ApiProperty({example: '2024-12-01'})
     @IsDateString()

@@ -6,10 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Medical Services API')
+    .setTitle('Citas Medicas API')
     .setDescription('Prueba Técnica Backend - Sempiterno Group')
     .setVersion('1.0')
-    .addBearerAuth() // Necesario para el CRUD de autenticación 
+    .addBearerAuth()
     .build();
 
     const document = SwaggerModule.createDocument(app, config);
