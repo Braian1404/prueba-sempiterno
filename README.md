@@ -20,3 +20,10 @@ Este proyecto es una solución backend desarrollada con **NestJS** y **PostgreSQ
    ```bash
    npm install
    npm run start:dev
+
+## Credenciales de Prueba
+
+| Rol    | Usuario  | Contraseña |
+|--------|----------|------------|
+| ADMIN  | admin    | 1234       |
+| CLIENT | client   | 1234       |
