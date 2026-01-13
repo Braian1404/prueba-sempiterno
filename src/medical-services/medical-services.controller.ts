@@ -6,7 +6,7 @@ import { roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guard/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
 
 
 @ApiTags('Servicios Médicos')
@@ -23,17 +23,22 @@ export class MedicalServicesController {
   @ApiResponse({ status: 201, description: 'Servicio creado con éxito.' })
   @ApiResponse({ status: 403, description: 'Prohibido - No tienes permisos de ADMIN.' })
   @ApiResponse({ status: 500, description: 'Error interno del servidor.' })
+
   create(@Body() createMedicalServiceDto: CreateMedicalServiceDto) {
     return this.medicalServicesService.create(createMedicalServiceDto);
   }
 
   @Get()
+  @ApiOperation({ summary: 'Consultar servicios por rango de fechas', description: 'Permite filtrar servicios médicos disponibles.' })
+  @ApiQuery({ name: 'startDate', required: false, example: '2023-01-01' })
+  @ApiQuery({ name: 'endDate', required: false, example: '2023-12-31' })
   @roles('ADMIN', 'CLIENT')
   findAll(@Query('startDate') startDate?: string, @Query('endDate') endDate?: string) {
     return this.medicalServicesService.findAll(startDate, endDate);
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Consultar servicios por identificador (el id es con uuid)', description: 'Permite filtrar servicios médicos disponibles mediante la id(uuid).' })
   @roles('ADMIN', 'CLIENT')
   findOne(@Param('id') id: string) {
     return this.medicalServicesService.findOne(id);
@@ -41,12 +46,16 @@ export class MedicalServicesController {
 
   @Patch(':id')
   @roles('ADMIN')
+  @ApiOperation({ summary: 'Actualizar servicios por identificador (el id es con uuid)', description: 'Permite modificar un servicio medico existente (uuid)' })
   update(@Param('id') id: string, @Body() updateMedicalServiceDto: UpdateMedicalServiceDto) {
     return this.medicalServicesService.update(id, updateMedicalServiceDto);
   }
 
   @Delete(':id')
   @roles('ADMIN')
+  @ApiOperation({ summary: 'Eliminación lógica del servicio', description: 'Permite ocultar o "eliminar" un servicio publico sin borrarlo de la BD' })
+  @ApiResponse({ status: 200, description: 'Servicio eliminado con éxito.' })
+
   remove(@Param('id') id: string) {
     return this.medicalServicesService.remove(id);
   }

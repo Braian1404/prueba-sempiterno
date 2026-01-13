@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Citas Medicas API')
-    .setDescription('Prueba Técnica Backend - Sempiterno Group')
+    .setDescription('Prueba Técnica Backend: CRUD de servicios, Autenticación JWT y Roles (ADMIN/CLIENT).')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
