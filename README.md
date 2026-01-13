@@ -1,8 +1,22 @@
+#  Sistema de Gestión de Servicios Médicos
 
-*Importante* crear una BD en postgre llamada "medic"
+Este proyecto es una solución backend desarrollada con **NestJS** y **PostgreSQL** para la gestión de citas y servicios médicos, cumpliendo con requerimientos de seguridad, roles y persistencia de datos.
 
-<Strong>Arquitectura:</Strong> Basada en módulos (NestJS), siguiendo el patrón de diseño de controladores y servicios para separar la lógica de negocio de las rutas.
+##  Tecnologías Utilizadas
+* Framework: NestJS (Node.js)
+* Base de Datos: PostgreSQL con TypeORM
+* Autenticación: Passport JWT (JSON Web Tokens)
+* Documentación: Swagger UI
 
-<Strong>Modelado de Datos: </Strong> Relacional en PostgreSQL, con una entidad User (usando UUIDs para seguridad) y una entidad MedicalService con campos de fecha para el filtrado.
+## Configuración e Instalación
 
-<Strong>Autenticación:</Strong> JWT (JSON Web Tokens) con estrategia de Passport. Se eligió esta estrategia por su escalabilidad y facilidad de integración con roles (Guards).
+1. Base de Datos:
+   **IMPORTANTE** Crear una base de datos en PostgreSQL llamada `medic`.
+   
+2. Variables de Entorno:
+   Configurar el archivo `.env` con las credenciales de su base de datos local.
+
+3. Ejecución:
+   ```bash
+   npm install
+   npm run start:dev
