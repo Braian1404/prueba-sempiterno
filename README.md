@@ -11,7 +11,7 @@ Este proyecto es una solución backend desarrollada con **NestJS** y **PostgreSQ
 ## Configuración e Instalación
 
 1. Base de Datos:
-   **IMPORTANTE** Crear una base de datos en PostgreSQL llamada `medic`.
+   **IMPORTANTE** Crear una base de datos en PostgreSQL llamada `medic`, no conseguí hacer que se creara sola la BD.
    
 2. Variables de Entorno:
    Configurar el archivo `.env` con las credenciales de su base de datos local.
