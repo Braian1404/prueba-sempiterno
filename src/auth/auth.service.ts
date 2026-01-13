@@ -26,11 +26,11 @@ async onModuleInit() {
     await this.userRepository.save(admin);
   }
 
-  const clientExists = await this.userRepository.findOne({ where: { username: 'cliente' } });
+  const clientExists = await this.userRepository.findOne({ where: { username: 'client' } });
   
   if (!clientExists) {
     const client = this.userRepository.create({
-      username: 'cliente',
+      username: 'client',
       password: '1234',
       role: Role.CLIENT,
     });

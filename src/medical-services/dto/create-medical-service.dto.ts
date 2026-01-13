@@ -3,25 +3,25 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateMedicalServiceDto {
 
-    @ApiProperty({example: "Consulta General"})
+    @ApiProperty({ example: 'Consulta General', description: 'Nombre del servicio' })
     @IsString()
     @IsNotEmpty()
-    nombre: string;
+    name: string;
 
-    @ApiProperty({example: "Chequeo Preventivo Anual"})
+    @ApiProperty({ example: 'Atención primaria de salud', description: 'Descripción detallada' })
     @IsString()
     @IsNotEmpty()
-    descripción: string;
+    description: string;
 
-    @ApiProperty({example: 10000})
+    @ApiProperty({ example: 50, description: 'Costo del servicio' })
     @IsNumber()
-    costo: number
+    cost: number
 
-    @ApiProperty({example: 30})
+    @ApiProperty({example: 30, description: 'Duración del servicio en minutos '})
     @IsString()
-    duración: number
+    duration: number
 
-    @ApiProperty({example: '2024-12-01'})
+    @ApiProperty({ example: '2023-10-25', description: 'Fecha de disponibilidad' })
     @IsDateString()
     availableDate: Date
 
