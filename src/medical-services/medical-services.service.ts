@@ -31,7 +31,7 @@ export class MedicalServicesService {
   }
 
   async findOne(id: string) {
-    const service = await this.medicalServiceRepository.findOneBy({ id }); // Uso correcto de findOneBy
+    const service = await this.medicalServiceRepository.findOneBy({ id });
     if (!service) throw new NotFoundException(`Servicio con ID ${id} no encontrado`);
     return service;
   }
